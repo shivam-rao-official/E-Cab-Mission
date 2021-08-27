@@ -5,8 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ConfirmBookScreens extends StatefulWidget {
   var tripId;
+  var empId;
 
-  ConfirmBookScreens({this.tripId});
+  ConfirmBookScreens({this.tripId, this.empId});
   @override
   _ConfirmBookScreensState createState() => _ConfirmBookScreensState();
 }
@@ -31,19 +32,11 @@ class _ConfirmBookScreensState extends State<ConfirmBookScreens> {
       });
   }
 
-  Future getEmpId() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      confirmedBy = prefs.getString('EmpId');
-    });
-  }
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getTripData();
-    getEmpId();
   }
 
   final _key = GlobalKey<FormState>();
@@ -55,18 +48,15 @@ class _ConfirmBookScreensState extends State<ConfirmBookScreens> {
         title: Text(
           "TRIP DETAILS",
           style: TextStyle(
-            color: Colors.black,
             fontWeight: FontWeight.w900,
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.white,
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
           icon: Icon(Icons.arrow_back),
-          color: Colors.black,
         ),
       ),
       body: Form(
@@ -174,7 +164,7 @@ class _ConfirmBookScreensState extends State<ConfirmBookScreens> {
                               validator: (val) {
                                 if (val.isEmpty)
                                   return 'Driver Number is Required';
-                                if (val.length < 10 && val.length > 10)
+                                if (val.length < 10 || val.length > 10)
                                   return 'Enter a valid Number';
                               },
                             ),
@@ -185,7 +175,7 @@ class _ConfirmBookScreensState extends State<ConfirmBookScreens> {
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 40,
                 ),
                 isSubmit
                     ? CircularProgressIndicator()
@@ -225,25 +215,26 @@ class _ConfirmBookScreensState extends State<ConfirmBookScreens> {
   }
 
   Future confirmBooking() async {
-    setState(() {
-      isSubmit = true;
-    });
-    var res = await Dio().put(
-        'https://cab-server.herokuapp.com/trip/confirmTrip/' + widget.tripId,
-        data: {
-          "vehicleNum": vehicleNum,
-          "driverNum": driverNum,
-          "confirmedBy": confirmedBy,
-          "confirmed": true,
-        });
-    setState(() {
-      isSubmit = false;
-    });
-    if (res.statusCode == 200) {
-      signInMessage(res.data['status'], res.data['msg']);
-    } else {
-      signInMessage(res.data['status'], res.data['msg']);
-    }
+    print(widget.empId);
+    // setState(() {
+    //   isSubmit = true;
+    // });
+    // var res = await Dio().put(
+    //     'https://cab-server.herokuapp.com/trip/confirmTrip/' + widget.tripId,
+    //     data: {
+    //       "vehicleNum": vehicleNum,
+    //       "driverNum": driverNum,
+    //       "confirmedBy": widget.empId,
+    //       "confirmed": true,
+    //     });
+    // setState(() {
+    //   isSubmit = false;
+    // });
+    // if (res.statusCode == 200) {
+    //   signInMessage(res.data['status'], res.data['msg']);
+    // } else {
+    //   signInMessage(res.data['status'], res.data['msg']);
+    // }
   }
 
   signInMessage(bool success, String msg) {
@@ -268,6 +259,8 @@ class _ConfirmBookScreensState extends State<ConfirmBookScreens> {
                   TextButton(
                     child: Text("Proceed"),
                     onPressed: () {
+                      Navigator.of(context).pop();
+                      Navigator.of(context).pop();
                       Navigator.of(context).pushReplacementNamed('/admin');
                     },
                   ),

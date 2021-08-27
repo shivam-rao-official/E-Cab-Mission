@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TripBooking extends StatefulWidget {
+  var vehicle;
+
+  TripBooking({this.vehicle});
   @override
   _TripBookingState createState() => _TripBookingState();
 }
@@ -180,20 +183,11 @@ class _TripBookingState extends State<TripBooking> {
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
                               ),
+                              enabled: false,
                               fillColor: Color(0xffC4C4C4).withOpacity(.2),
                               filled: true,
+                              labelText: widget.vehicle,
                             ),
-                            onChanged: (val) {
-                              _vehicleType = val;
-                            },
-                            onSaved: (val) {
-                              _vehicleType = val;
-                            },
-                            // ignore: missing_return
-                            validator: (val) {
-                              if (val.isEmpty)
-                                return 'Vehicle Type is Required';
-                            },
                           ),
                         ),
                       ],
@@ -250,7 +244,7 @@ class _TripBookingState extends State<TripBooking> {
       "empId": _empId,
       "origin": _origin,
       "destination": _destination,
-      "vehicleType": _vehicleType
+      "vehicleType": widget.vehicle,
     });
 
     if (res.statusCode == 200) {

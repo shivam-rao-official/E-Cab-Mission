@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-Widget customDrawer(BuildContext context, String name, String empId) {
+Widget customDrawer(BuildContext context, String name) {
   Future logOut() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove('Name');
     await prefs.remove('PhoneNum');
     await prefs.remove('EmpID');
+    await prefs.remove('Role');
   }
 
   return Drawer(
@@ -22,7 +23,7 @@ Widget customDrawer(BuildContext context, String name, String empId) {
             ),
           ),
           accountEmail: Text(
-            "Drawer",
+            name,
             style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,

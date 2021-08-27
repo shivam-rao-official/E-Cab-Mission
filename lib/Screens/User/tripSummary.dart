@@ -56,6 +56,14 @@ class _TripSummaryState extends State<TripSummary> {
         ),
         centerTitle: true,
         backgroundColor: Colors.white,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            )),
         elevation: 0,
       ),
       body: Column(

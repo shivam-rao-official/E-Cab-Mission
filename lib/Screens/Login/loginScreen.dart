@@ -200,7 +200,7 @@ class _LoginScreenState extends State<LoginScreen> {
         await prefs.setString('PhoneNum', res.data["data"]["phoneNum"]);
         if (res.data['data']['role'] != null) {
           await prefs.setString('Role', res.data["data"]["role"]);
-          _role = prefs.getString('Role');
+          _role = await res.data['data']['role'];
         }
         signInMessage(res.data["status"], res.data["msg"]);
       } else {
@@ -235,14 +235,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   TextButton(
                     child: Text("Proceed"),
                     onPressed: () {
+                      Navigator.of(context).pop();
                       _role == 'admin'
-                          ? Navigator.push(
+                          ? Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => AdminHomeScreen(),
                               ),
                             )
-                          : Navigator.push(
+                          : Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => HomeScreen(),

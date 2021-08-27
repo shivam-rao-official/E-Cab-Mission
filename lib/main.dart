@@ -28,7 +28,16 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Color(0xff003566),
+        buttonColor: Color(0xffffd60a),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: Color(0xffffd60a),
+          elevation: 20,
+          splashColor: Color(0xffffc300),
+        ),
+        appBarTheme: AppBarTheme(
+          color: Color(0xff003566),
+        ),
         iconTheme: IconThemeData(color: Colors.black),
       ),
       routes: <String, WidgetBuilder>{
@@ -38,6 +47,7 @@ class MyApp extends StatelessWidget {
         '/home': (BuildContext ctxt) => HomeScreen(),
         '/bookTrip': (BuildContext ctxt) => TripBooking(),
         '/tripSummary': (BuildContext ctxt) => TripSummary(),
+        // ADMIN ROUTES
         '/admin': (BuildContext ctxt) => AdminHomeScreen(),
       },
       home: Splash(),
