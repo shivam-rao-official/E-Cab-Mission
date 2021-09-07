@@ -21,10 +21,13 @@ class _TripBookingState extends State<TripBooking> {
   Future<void> getEmpID() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _empId = prefs.getString('EmpID');
+    _role = prefs.getString('Role');
+    print(_role);
   }
 
   final _tripBookKey = GlobalKey<FormState>();
   String _empId;
+  String _role;
   String _origin;
   String _destination;
   String _vehicleType;
@@ -51,183 +54,186 @@ class _TripBookingState extends State<TripBooking> {
           color: Colors.black,
         ),
       ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: SingleChildScrollView(
-          child: Form(
-            key: _tripBookKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 10,
-                ),
-                /**
-                 *  From Field
-                 */
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            "From",
-                            style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              fillColor: Color(0xffC4C4C4).withOpacity(.2),
-                              filled: true,
-                            ),
-                            onChanged: (val) {
-                              _origin = val;
-                            },
-                            onSaved: (val) {
-                              _origin = val;
-                            },
-                            // ignore: missing_return
-                            validator: (val) {
-                              if (val.isEmpty) return 'Field is Required';
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
+      body: Center(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width - 30,
+          child: SingleChildScrollView(
+            child: Form(
+              key: _tripBookKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 10,
                   ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            "Destination",
-                            style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
+                  /**
+                   *  From Field
+                   */
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "From",
+                              style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
                               ),
-                              fillColor: Color(0xffC4C4C4).withOpacity(.2),
-                              filled: true,
-                            ),
-                            onChanged: (val) {
-                              _destination = val;
-                            },
-                            onSaved: (val) {
-                              _destination = val;
-                            },
-                            // ignore: missing_return
-                            validator: (val) {
-                              if (val.isEmpty) return 'Destination is Required';
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            "Vehicle Type",
-                            style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                fillColor: Color(0xffC4C4C4).withOpacity(.2),
+                                filled: true,
                               ),
-                              enabled: false,
-                              fillColor: Color(0xffC4C4C4).withOpacity(.2),
-                              filled: true,
-                              labelText: widget.vehicle,
+                              onChanged: (val) {
+                                _origin = val;
+                              },
+                              onSaved: (val) {
+                                _origin = val;
+                              },
+                              // ignore: missing_return
+                              validator: (val) {
+                                if (val.isEmpty) return 'Field is Required';
+                              },
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 10,
-                ),
-                isSubmit
-                    ? CircularProgressIndicator()
-                    : MaterialButton(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            top: 15.0,
-                            bottom: 15.0,
-                            right: 40,
-                            left: 40,
-                          ),
-                          child: Text(
-                            "Add Trip",
-                            style: TextStyle(
-                              fontSize: 25,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        color: Color(0xfff2400FF),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        onPressed: () {
-                          if (_tripBookKey.currentState.validate()) {
-                            getData();
-                          }
-                          // Navigator.of(context).pushReplacementNamed('/home');
-                        },
+                        ],
                       ),
-              ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Destination",
+                              style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                fillColor: Color(0xffC4C4C4).withOpacity(.2),
+                                filled: true,
+                              ),
+                              onChanged: (val) {
+                                _destination = val;
+                              },
+                              onSaved: (val) {
+                                _destination = val;
+                              },
+                              // ignore: missing_return
+                              validator: (val) {
+                                if (val.isEmpty)
+                                  return 'Destination is Required';
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Vehicle Type",
+                              style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                enabled: false,
+                                fillColor: Color(0xffC4C4C4).withOpacity(.2),
+                                filled: true,
+                                labelText: widget.vehicle,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 10,
+                  ),
+                  isSubmit
+                      ? CircularProgressIndicator()
+                      : MaterialButton(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              top: 15.0,
+                              bottom: 15.0,
+                              right: 40,
+                              left: 40,
+                            ),
+                            child: Text(
+                              "Add Trip",
+                              style: TextStyle(
+                                fontSize: 25,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          color: Color(0xfff2400FF),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          onPressed: () {
+                            if (_tripBookKey.currentState.validate()) {
+                              getData();
+                            }
+                            // Navigator.of(context).pushReplacementNamed('/home');
+                          },
+                        ),
+                ],
+              ),
             ),
           ),
         ),
@@ -281,7 +287,9 @@ class _TripBookingState extends State<TripBooking> {
                   TextButton(
                     child: Text("Proceed"),
                     onPressed: () {
-                      Navigator.of(context).pushReplacementNamed('/home');
+                      _role == "admin"
+                          ? Navigator.of(context).pushReplacementNamed('/admin')
+                          : Navigator.of(context).pushReplacementNamed('/home');
                     },
                   ),
                 ],

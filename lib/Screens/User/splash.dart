@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:gmaps_demo/Widgets/appbar.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -22,16 +23,39 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        color: Color(0xffFFF5D0),
-        child: Center(
-          child: Image(
-            image: AssetImage('assets/icons/taxi.png'),
-            height: MediaQuery.of(context).size.height / 2,
-            width: MediaQuery.of(context).size.width / 2,
-          ),
+      // appBar: CustomAppBar(context),
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height / 4,
+              width: MediaQuery.of(context).size.width / 4,
+              child: Image(
+                image: AssetImage('assets/icons/ambulance.png'),
+              ),
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            Text(
+              "The Mission e-Cab",
+              style: TextStyle(
+                  fontSize: 30,
+                  fontFamily: 'Satisfy',
+                  fontWeight: FontWeight.bold),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                  top: 40,
+                  left: MediaQuery.of(context).size.width / 5,
+                  right: MediaQuery.of(context).size.width / 5),
+              child: LinearProgressIndicator(
+                color: Color(0xff203b62),
+              ),
+            )
+          ],
         ),
       ),
     );

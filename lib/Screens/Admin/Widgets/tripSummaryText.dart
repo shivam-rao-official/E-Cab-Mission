@@ -62,6 +62,7 @@ Widget tripConfirmText(String label, String value, context) {
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
               decoration: InputDecoration(
+                enabled: false,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),

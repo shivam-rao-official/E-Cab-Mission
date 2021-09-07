@@ -31,150 +31,156 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image(
-                  image: AssetImage('assets/icons/taxi.png'),
-                  height: MediaQuery.of(context).size.height / 4,
-                  width: MediaQuery.of(context).size.width / 4,
-                ),
-                /**
-                 *    Email Field
-                 */
-
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      labelText: "Emp ID",
-                      labelStyle: TextStyle(
-                        fontSize: 20,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      fillColor: Color(0xffC4C4C4).withOpacity(.2),
-                      filled: true,
-                    ),
-                    onChanged: (val) {
-                      _empId = val;
-                    },
-                    onSaved: (val) {
-                      _empId = val;
-                    },
-                    // ignore: missing_return
-                    validator: (val) {
-                      if (val.isEmpty) return 'Employee ID is Required';
-                    },
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 30.0),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image(
+                    image: AssetImage('assets/icons/ambulance.png'),
+                    height: MediaQuery.of(context).size.height / 4,
+                    width: MediaQuery.of(context).size.width / 4,
                   ),
-                ),
+                  /**
+                   *    Email Field
+                   */
 
-                /**
-                 *    Password Field
-                 */
-                SizedBox(height: 30),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      labelStyle: TextStyle(
-                        fontSize: 20,
-                      ),
-                      suffixIcon: IconButton(
-                        icon: counter % 2 == 0
-                            ? Icon(Icons.panorama_fish_eye_outlined)
-                            : Icon(Icons.circle),
-                        onPressed: () {
-                          setState(() {
-                            obscure = obscureCount();
-                          });
-                        },
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                    obscureText: obscure,
-                    obscuringCharacter: '*',
-                    keyboardType: TextInputType.visiblePassword,
-                    onChanged: (val) {
-                      _passwd = val;
-                    },
-                    onSaved: (val) {
-                      _passwd = val;
-                    },
-                    // ignore: missing_return
-                    validator: (val) {
-                      if (val.isEmpty)
-                        return 'Password is Required';
-                      else if (val.length < 6)
-                        return 'Password must be of length 6';
-                    },
-                  ), //Password Field Ends
-                ),
-                SizedBox(height: 30),
-                isSubmit
-                    ? CircularProgressIndicator()
-                    : MaterialButton(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            top: 15.0,
-                            bottom: 15.0,
-                            right: 40,
-                            left: 40,
-                          ),
-                          child: Text(
-                            "LOGIN",
-                            style: TextStyle(
-                              fontSize: 25,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        labelText: "Emp ID",
+                        labelStyle: TextStyle(
+                          fontSize: 20,
                         ),
-                        color: Color(0xfff2400FF),
-                        shape: RoundedRectangleBorder(
+                        border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
-                        onPressed: () {
-                          if (_formKey.currentState.validate()) {
-                            setState(() {
-                              getData();
-                            });
-                          }
-                        },
+                        fillColor: Color(0xffC4C4C4).withOpacity(.2),
+                        filled: true,
                       ),
-                Padding(
-                  padding: EdgeInsets.all(40),
-                  child: Divider(
-                    thickness: 3,
-                  ),
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Don't Have an account?"),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pushNamed('/signup');
+                      onChanged: (val) {
+                        _empId = val;
                       },
-                      child: Text("Sign Up"),
+                      onSaved: (val) {
+                        _empId = val;
+                      },
+                      // ignore: missing_return
+                      validator: (val) {
+                        if (val.isEmpty) return 'Employee ID is Required';
+                      },
                     ),
-                  ],
-                ),
-              ],
+                  ),
+
+                  /**
+                   *    Password Field
+                   */
+                  SizedBox(height: 30),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        labelStyle: TextStyle(
+                          fontSize: 20,
+                        ),
+                        suffixIcon: IconButton(
+                          icon: counter % 2 == 0
+                              ? Icon(Icons.visibility)
+                              : Icon(Icons.visibility_off),
+                          onPressed: () {
+                            setState(() {
+                              obscure = obscureCount();
+                            });
+                          },
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
+                      obscureText: obscure,
+                      obscuringCharacter: '*',
+                      keyboardType: TextInputType.visiblePassword,
+                      onChanged: (val) {
+                        _passwd = val;
+                      },
+                      onSaved: (val) {
+                        _passwd = val;
+                      },
+                      // ignore: missing_return
+                      validator: (val) {
+                        if (val.isEmpty)
+                          return 'Password is Required';
+                        else if (val.length < 8)
+                          return 'Password must contains minimum 8 characters';
+                        else if (!val.contains(RegExp(
+                            r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$')))
+                          return "Password must contains atleast \n At least one uppercase letter, \n One lowercase letter, \n One number and \n One special character";
+                      },
+                    ), //Password Field Ends
+                  ),
+                  SizedBox(height: 30),
+                  isSubmit
+                      ? CircularProgressIndicator()
+                      : MaterialButton(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              top: 15.0,
+                              bottom: 15.0,
+                              right: 40,
+                              left: 40,
+                            ),
+                            child: Text(
+                              "LOGIN",
+                              style: TextStyle(
+                                fontSize: 25,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          color: Color(0xfff2400FF),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          onPressed: () {
+                            if (_formKey.currentState.validate()) {
+                              setState(() {
+                                getData();
+                              });
+                            }
+                          },
+                        ),
+                  Padding(
+                    padding: EdgeInsets.all(40),
+                    child: Divider(
+                      thickness: 3,
+                    ),
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Don't Have an account?"),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pushNamed('/signup');
+                        },
+                        child: Text("Sign Up"),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

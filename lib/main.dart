@@ -8,6 +8,7 @@ import 'package:gmaps_demo/Screens/User/homecreen.dart';
 import 'package:gmaps_demo/Screens/User/splash.dart';
 import 'package:gmaps_demo/Screens/User/splash2.dart';
 import 'package:gmaps_demo/Screens/User/tripSummary.dart';
+import 'package:gmaps_demo/Screens/accounts.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -47,10 +48,11 @@ class MyApp extends StatelessWidget {
         '/home': (BuildContext ctxt) => HomeScreen(),
         '/bookTrip': (BuildContext ctxt) => TripBooking(),
         '/tripSummary': (BuildContext ctxt) => TripSummary(),
+        '/account': (BuildContext ctxt) => AccountScreen(),
         // ADMIN ROUTES
         '/admin': (BuildContext ctxt) => AdminHomeScreen(),
       },
-      home: Splash(),
+      home: Splash2(),
     );
   }
 }

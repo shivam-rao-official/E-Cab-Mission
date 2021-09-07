@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:gmaps_demo/Screens/User/bookingPage.dart';
 import 'package:gmaps_demo/Screens/User/helpScreen.dart';
 import 'package:gmaps_demo/Screens/User/tripList.dart';
+import 'package:gmaps_demo/Screens/User/userFeedback.dart';
 import 'package:gmaps_demo/Widgets/HomeTabs.dart';
+import 'package:gmaps_demo/Widgets/appbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -36,39 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(MediaQuery.of(context).size.height / 3),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Color(0xff2ec4b6),
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(40),
-              bottomRight: Radius.circular(40),
-            ),
-          ),
-          // child: Column(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: [
-          //     Row(
-          //       mainAxisAlignment: MainAxisAlignment.center,
-          //       children: [
-          //         Center(
-          //           child: Text(
-          //             'Welcome',
-          //             style: TextStyle(fontSize: 30),
-          //           ),
-          //         ),
-          //         Align(
-          //             alignment: Alignment.topRight,
-          //             child: Icon(Icons.logout_outlined)),
-          //       ],
-          //     ),
-          //   ],
-          // ),
-
-          height: MediaQuery.of(context).size.height / 3,
-        ),
-      ),
+      appBar: CustomAppBar(context),
 
       /**
        *  Custom Drawer
@@ -79,41 +49,88 @@ class _HomeScreenState extends State<HomeScreen> {
           /**
            *    Car and Cab Booking
            */
+          SizedBox(
+            height: 70,
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: new Container(
+                    margin: const EdgeInsets.only(left: 30.0, right: 30.0),
+                    child: Divider(
+                      color: Colors.black,
+                      height: 36,
+                    )),
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Choose a vehicle?",
+                  style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width / 20,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: new Container(
+                    margin: const EdgeInsets.only(left: 20.0, right: 30.0),
+                    child: Divider(
+                      color: Colors.black,
+                      height: 36,
+                    )),
+              ),
+            ],
+          ),
           Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                homeTab(20, 90, 120, 120, 'assets/icons/sport-car.png',
-                    "Cab Booking", () {
-                  setState(() {
-                    Navigator.push(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  homeTab(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => TripBooking(
-                          vehicle: "CAR",
+                      20,
+                      90,
+                      MediaQuery.of(context).size.height / 5,
+                      MediaQuery.of(context).size.width / 5,
+                      'assets/icons/sport-car.png',
+                      "Cab", () {
+                    setState(() {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TripBooking(
+                            vehicle: "CAR",
+                          ),
                         ),
-                      ),
-                    );
-                  });
-                }),
-                SizedBox(
-                  width: 30,
-                ),
-                homeTab(20, 90, 120, 120, 'assets/icons/ambulance.png',
-                    "Ambulance Booking", () {
-                  setState(() {
-                    Navigator.push(
+                      );
+                    });
+                  }),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 5,
+                  ),
+                  homeTab(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => TripBooking(
-                          vehicle: "AMBULANCE",
+                      20,
+                      90,
+                      MediaQuery.of(context).size.height / 5,
+                      MediaQuery.of(context).size.width / 5,
+                      'assets/icons/ambulance.png',
+                      "Ambulance", () {
+                    setState(() {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TripBooking(
+                            vehicle: "AMBULANCE",
+                          ),
                         ),
-                      ),
-                    );
-                  });
-                }),
-              ],
+                      );
+                    });
+                  }),
+                ],
+              ),
             ),
           ),
           Divider(
@@ -135,8 +152,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   homeTab(
-                      20, 90, 120, 120, 'assets/icons/data.png', "Trip History",
-                      () {
+                      context,
+                      20,
+                      90,
+                      MediaQuery.of(context).size.height / 5,
+                      MediaQuery.of(context).size.width / 5,
+                      'assets/icons/data.png',
+                      "Trip History", () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -145,10 +167,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   }),
                   SizedBox(
-                    width: 30,
+                    width: MediaQuery.of(context).size.width / 6,
                   ),
-                  homeTab(20, 90, 150, 150, 'assets/icons/help.png', "Help",
-                      () {
+                  homeTab(
+                      context,
+                      20,
+                      90,
+                      MediaQuery.of(context).size.height / 5,
+                      MediaQuery.of(context).size.width / 5,
+                      'assets/icons/help.png',
+                      "Help", () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -159,8 +187,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(
                     width: 30,
                   ),
-                  homeTab(20, 90, 120, 120, 'assets/icons/positive-vote.png',
-                      "Feedback", () {}),
+                  // homeTab(
+                  //     context,
+                  //     20,
+                  //     90,
+                  //     MediaQuery.of(context).size.height / 5,
+                  //     MediaQuery.of(context).size.width / 5,
+                  //     'assets/icons/positive-vote.png',
+                  //     "Feedback", () {
+                  //   Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => FeedbackScreen(),
+                  //     ),
+                  //   );
+                  // }),
                 ],
               ),
             ),
@@ -350,7 +391,6 @@ class _HomeScreenState extends State<HomeScreen> {
         'https://cab-server.herokuapp.com/trip/viewTrips',
         data: {"empId": _empId});
 
-    print(res.data['msg']);
     return res.data["msg"];
   }
 }

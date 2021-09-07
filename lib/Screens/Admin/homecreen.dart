@@ -6,6 +6,7 @@ import 'package:gmaps_demo/Screens/Admin/tripOrder.dart';
 import 'package:gmaps_demo/Screens/User/bookingPage.dart';
 import 'package:gmaps_demo/Screens/User/tripList.dart';
 import 'package:gmaps_demo/Widgets/HomeTabs.dart';
+import 'package:gmaps_demo/Widgets/appbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AdminHomeScreen extends StatefulWidget {
@@ -38,19 +39,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(MediaQuery.of(context).size.height / 3),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Color(0xff2ec4b6),
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(40),
-              bottomRight: Radius.circular(40),
-            ),
-          ),
-          height: MediaQuery.of(context).size.height / 3,
-        ),
-      ),
+      appBar: CustomAppBar(context),
 
       /**
        *  Custom Drawer
@@ -60,12 +49,21 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
           /**
            *    Car and Cab Booking
            */
+          SizedBox(
+            height: 70,
+          ),
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                homeTab(20, 90, 120, 120, 'assets/icons/sport-car.png',
+                homeTab(
+                    context,
+                    20,
+                    90,
+                    MediaQuery.of(context).size.height / 5,
+                    MediaQuery.of(context).size.width / 5,
+                    'assets/icons/sport-car.png',
                     "Cab Booking", () {
                   setState(() {
                     Navigator.push(
@@ -81,7 +79,13 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                 SizedBox(
                   width: 30,
                 ),
-                homeTab(20, 90, 120, 120, 'assets/icons/ambulance.png',
+                homeTab(
+                    context,
+                    20,
+                    90,
+                    MediaQuery.of(context).size.height / 5,
+                    MediaQuery.of(context).size.width / 5,
+                    'assets/icons/ambulance.png',
                     "Ambulance Booking", () {
                   setState(() {
                     Navigator.push(
@@ -116,8 +120,13 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   homeTab(
-                      20, 90, 120, 120, 'assets/icons/data.png', "Trip History",
-                      () {
+                      context,
+                      20,
+                      90,
+                      MediaQuery.of(context).size.height / 5,
+                      MediaQuery.of(context).size.width / 5,
+                      'assets/icons/data.png',
+                      "Trip History", () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -128,40 +137,59 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                   SizedBox(
                     width: 30,
                   ),
-                  homeTab(20, 90, 150, 150, 'assets/icons/confirmation.png',
+                  homeTab(
+                      context,
+                      20,
+                      90,
+                      MediaQuery.of(context).size.height / 5,
+                      MediaQuery.of(context).size.width / 5,
+                      'assets/icons/confirmation.png',
                       "Trip Confirmation", () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => TripOrder(),
+                        builder: (context) => TripOrder(
+                          empId: _empId,
+                        ),
                       ),
                     );
                   }),
                   SizedBox(
                     width: 30,
                   ),
-                  homeTab(20, 90, 120, 120, 'assets/icons/positive-vote.png',
-                      "Feedback", () {}),
+                  homeTab(
+                      context,
+                      20,
+                      90,
+                      MediaQuery.of(context).size.height / 5,
+                      MediaQuery.of(context).size.width / 5,
+                      'assets/icons/positive-vote.png',
+                      "Feedback", () {
+                    Navigator.of(context).pushNamed('/account');
+                  }),
                 ],
               ),
             ),
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          setState(() {
-            logOut();
-            Navigator.of(context).pushReplacementNamed('/login');
-          });
-        },
-        label: Text(
-          "Logout",
-          style: TextStyle(
-            fontSize: 30,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 30.0),
+        child: FloatingActionButton.extended(
+          onPressed: () {
+            setState(() {
+              logOut();
+              Navigator.of(context).pushReplacementNamed('/login');
+            });
+          },
+          label: Text(
+            "Logout",
+            style: TextStyle(
+              fontSize: 30,
+            ),
           ),
+          backgroundColor: Color(0xff233d4d),
         ),
-        backgroundColor: Color(0xff233d4d),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,

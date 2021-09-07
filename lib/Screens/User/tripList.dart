@@ -43,7 +43,8 @@ class _TripListState extends State<TripList> {
               return Center(
                 child: Text(
                   "No Trips has been done yet",
-                  style: TextStyle(fontSize: 30),
+                  style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width / 20),
                 ),
               );
             }
@@ -83,14 +84,14 @@ class _TripListState extends State<TripList> {
                                     Text(snapshot.data[index]['empId']),
                                   ],
                                 ),
-                                Spacer(),
-                                Row(
-                                  children: [
-                                    Text("Raised Date ->"),
-                                    SizedBox(width: 10),
-                                    Text(snapshot.data[index]['createdAt']),
-                                  ],
-                                ),
+                                // Spacer(),
+                                // Row(
+                                //   children: [
+                                //     Text("Raised Date ->"),
+                                //     SizedBox(width: 10),
+                                //     Text(snapshot.data[index]['createdAt']),
+                                //   ],
+                                // ),
                               ],
                             ),
                             onTap: () {
@@ -136,14 +137,14 @@ class _TripListState extends State<TripList> {
                                     Text(snapshot.data[index]['empId']),
                                   ],
                                 ),
-                                Spacer(),
-                                Row(
-                                  children: [
-                                    Text("Raised Date ->"),
-                                    SizedBox(width: 10),
-                                    Text(snapshot.data[index]['createdAt']),
-                                  ],
-                                ),
+                                // Spacer(),
+                                // Row(
+                                //   children: [
+                                //     Text("Raised Date ->"),
+                                //     SizedBox(width: 10),
+                                //     Text(snapshot.data[index]['createdAt']),
+                                //   ],
+                                // ),
                               ],
                             ),
                             onTap: () {

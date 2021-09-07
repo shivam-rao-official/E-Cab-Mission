@@ -215,26 +215,25 @@ class _ConfirmBookScreensState extends State<ConfirmBookScreens> {
   }
 
   Future confirmBooking() async {
-    print(widget.empId);
-    // setState(() {
-    //   isSubmit = true;
-    // });
-    // var res = await Dio().put(
-    //     'https://cab-server.herokuapp.com/trip/confirmTrip/' + widget.tripId,
-    //     data: {
-    //       "vehicleNum": vehicleNum,
-    //       "driverNum": driverNum,
-    //       "confirmedBy": widget.empId,
-    //       "confirmed": true,
-    //     });
-    // setState(() {
-    //   isSubmit = false;
-    // });
-    // if (res.statusCode == 200) {
-    //   signInMessage(res.data['status'], res.data['msg']);
-    // } else {
-    //   signInMessage(res.data['status'], res.data['msg']);
-    // }
+    setState(() {
+      isSubmit = true;
+    });
+    var res = await Dio().put(
+        'https://cab-server.herokuapp.com/trip/confirmTrip/' + widget.tripId,
+        data: {
+          "vehicleNum": vehicleNum,
+          "driverNum": driverNum,
+          "confirmedBy": widget.empId,
+          "confirmed": true,
+        });
+    setState(() {
+      isSubmit = false;
+    });
+    if (res.statusCode == 200) {
+      signInMessage(res.data['status'], res.data['msg']);
+    } else {
+      signInMessage(res.data['status'], res.data['msg']);
+    }
   }
 
   signInMessage(bool success, String msg) {

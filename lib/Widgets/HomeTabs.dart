@@ -22,8 +22,8 @@ Widget homeTabs() {
   );
 }
 
-Widget homeTab(double elevation, double radius, double height, double width,
-    String image, String label, Function onTap) {
+Widget homeTab(BuildContext context, double elevation, double radius,
+    double height, double width, String image, String label, Function onTap) {
   return Column(
     children: [
       Container(
@@ -42,7 +42,7 @@ Widget homeTab(double elevation, double radius, double height, double width,
             ),
           ),
         ),
-        height: height,
+        // height: height,
         width: width,
       ),
       SizedBox(
@@ -51,7 +51,7 @@ Widget homeTab(double elevation, double radius, double height, double width,
       Text(
         label,
         style: TextStyle(
-          fontSize: 25,
+          fontSize: MediaQuery.of(context).size.width / 20,
           fontWeight: FontWeight.bold,
         ),
       ),
