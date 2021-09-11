@@ -81,56 +81,50 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  homeTab(
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                homeTab(
+                    context,
+                    20,
+                    90,
+                    MediaQuery.of(context).size.height / 5,
+                    MediaQuery.of(context).size.width / 5,
+                    'assets/icons/sport-car.png',
+                    "Cab", () {
+                  setState(() {
+                    Navigator.push(
                       context,
-                      20,
-                      90,
-                      MediaQuery.of(context).size.height / 5,
-                      MediaQuery.of(context).size.width / 5,
-                      'assets/icons/sport-car.png',
-                      "Cab", () {
-                    setState(() {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => TripBooking(
-                            vehicle: "CAR",
-                          ),
+                      MaterialPageRoute(
+                        builder: (context) => TripBooking(
+                          vehicle: "CAR",
                         ),
-                      );
-                    });
-                  }),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width / 5,
-                  ),
-                  homeTab(
+                      ),
+                    );
+                  });
+                }),
+                homeTab(
+                    context,
+                    20,
+                    90,
+                    MediaQuery.of(context).size.height / 5,
+                    MediaQuery.of(context).size.width / 5,
+                    'assets/icons/ambulance.png',
+                    "Ambulance", () {
+                  setState(() {
+                    Navigator.push(
                       context,
-                      20,
-                      90,
-                      MediaQuery.of(context).size.height / 5,
-                      MediaQuery.of(context).size.width / 5,
-                      'assets/icons/ambulance.png',
-                      "Ambulance", () {
-                    setState(() {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => TripBooking(
-                            vehicle: "AMBULANCE",
-                          ),
+                      MaterialPageRoute(
+                        builder: (context) => TripBooking(
+                          vehicle: "AMBULANCE",
                         ),
-                      );
-                    });
-                  }),
-                ],
-              ),
+                      ),
+                    );
+                  });
+                }),
+              ],
             ),
           ),
           Divider(
@@ -144,228 +138,56 @@ class _HomeScreenState extends State<HomeScreen> {
            *    Not Implemented
            */
 
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  homeTab(
-                      context,
-                      20,
-                      90,
-                      MediaQuery.of(context).size.height / 5,
-                      MediaQuery.of(context).size.width / 5,
-                      'assets/icons/data.png',
-                      "Trip History", () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => TripList(empId: _empId),
-                      ),
-                    );
-                  }),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width / 6,
-                  ),
-                  homeTab(
-                      context,
-                      20,
-                      90,
-                      MediaQuery.of(context).size.height / 5,
-                      MediaQuery.of(context).size.width / 5,
-                      'assets/icons/help.png',
-                      "Help", () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HelpScreen(),
-                      ),
-                    );
-                  }),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  // homeTab(
-                  //     context,
-                  //     20,
-                  //     90,
-                  //     MediaQuery.of(context).size.height / 5,
-                  //     MediaQuery.of(context).size.width / 5,
-                  //     'assets/icons/positive-vote.png',
-                  //     "Feedback", () {
-                  //   Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => FeedbackScreen(),
-                  //     ),
-                  //   );
-                  // }),
-                ],
-              ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                homeTab(
+                    context,
+                    20,
+                    90,
+                    MediaQuery.of(context).size.height / 5,
+                    MediaQuery.of(context).size.width / 5,
+                    'assets/icons/data.png',
+                    "Trip History", () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TripList(empId: _empId),
+                    ),
+                  );
+                }),
+                homeTab(
+                    context,
+                    20,
+                    90,
+                    MediaQuery.of(context).size.height / 5,
+                    MediaQuery.of(context).size.width / 5,
+                    'assets/icons/help.png',
+                    "Help", () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HelpScreen(),
+                    ),
+                  );
+                }),
+                homeTab(
+                    context,
+                    20,
+                    90,
+                    MediaQuery.of(context).size.height / 5,
+                    MediaQuery.of(context).size.width / 5,
+                    'assets/icons/exit.png',
+                    "Logout", () {
+                  logOut();
+                }),
+              ],
             ),
           ),
         ],
       ),
-
-      // body: RefreshIndicator(
-      //   onRefresh: refreshData,
-      //   backgroundColor: Colors.black87,
-      //   strokeWidth: 3,
-      //   child: FutureBuilder(
-      //     builder: (context, snapshot) {
-      //       if (ConnectionState.active != null && !snapshot.hasData) {
-      //         return Center(child: CircularProgressIndicator());
-      //       }
-      //       if (ConnectionState.done != null && snapshot.hasError) {
-      //         return Center(
-      //           child: Text('Oops some has occured'),
-      //         );
-      //       }
-      //       if (ConnectionState.done != null &&
-      //           snapshot.hasData &&
-      //           snapshot.data.toString() == '[]') {
-      //         return Center(
-      //           child: Text(
-      //             "No Trips has been done yet",
-      //             style: TextStyle(fontSize: 30),
-      //           ),
-      //         );
-      //       }
-      //       return ListView.builder(
-      //           itemCount: snapshot.data.length,
-      //           itemBuilder: (context, index) {
-      //             return snapshot.data[index]['confirmed']
-      //                 ? Padding(
-      //                     padding: const EdgeInsets.all(8.0),
-      //                     child: ListTile(
-      //                       tileColor: Colors.green[50],
-      //                       title: Row(
-      //                         children: [
-      //                           Row(
-      //                             children: [
-      //                               Text("Origin ->"),
-      //                               SizedBox(width: 10),
-      //                               Text(snapshot.data[index]['origin']),
-      //                             ],
-      //                           ),
-      //                           Spacer(),
-      //                           Row(
-      //                             children: [
-      //                               Text("Destination ->"),
-      //                               SizedBox(width: 10),
-      //                               Text(snapshot.data[index]['destination']),
-      //                             ],
-      //                           ),
-      //                         ],
-      //                       ),
-      //                       subtitle: Row(
-      //                         children: [
-      //                           Row(
-      //                             children: [
-      //                               Text("Employee ID ->"),
-      //                               SizedBox(width: 10),
-      //                               Text(snapshot.data[index]['empId']),
-      //                             ],
-      //                           ),
-      //                           Spacer(),
-      //                           Row(
-      //                             children: [
-      //                               Text("Raised Date ->"),
-      //                               SizedBox(width: 10),
-      //                               Text(snapshot.data[index]['createdAt']),
-      //                             ],
-      //                           ),
-      //                         ],
-      //                       ),
-      //                       onTap: () {
-      //                         Navigator.push(
-      //                           context,
-      //                           MaterialPageRoute(
-      //                             builder: (context) => TripSummary(
-      //                               tripId: snapshot.data[index]['_id'],
-      //                             ),
-      //                           ),
-      //                         );
-      //                       },
-      //                     ))
-      //                 : Padding(
-      //                     padding: const EdgeInsets.all(8.0),
-      //                     child: ListTile(
-      //                       tileColor: Colors.amber[50],
-      //                       title: Row(
-      //                         children: [
-      //                           Row(
-      //                             children: [
-      //                               Text("Origin ->"),
-      //                               SizedBox(width: 10),
-      //                               Text(snapshot.data[index]['origin']),
-      //                             ],
-      //                           ),
-      //                           Spacer(),
-      //                           Row(
-      //                             children: [
-      //                               Text("Destination ->"),
-      //                               SizedBox(width: 10),
-      //                               Text(snapshot.data[index]['destination']),
-      //                             ],
-      //                           ),
-      //                         ],
-      //                       ),
-      //                       subtitle: Row(
-      //                         children: [
-      //                           Row(
-      //                             children: [
-      //                               Text("Employee ID ->"),
-      //                               SizedBox(width: 10),
-      //                               Text(snapshot.data[index]['empId']),
-      //                             ],
-      //                           ),
-      //                           Spacer(),
-      //                           Row(
-      //                             children: [
-      //                               Text("Raised Date ->"),
-      //                               SizedBox(width: 10),
-      //                               Text(snapshot.data[index]['createdAt']),
-      //                             ],
-      //                           ),
-      //                         ],
-      //                       ),
-      //                       onTap: () {
-      //                         Navigator.push(
-      //                           context,
-      //                           MaterialPageRoute(
-      //                             builder: (context) => TripSummary(
-      //                               tripId: snapshot.data[index]['_id'],
-      //                             ),
-      //                           ),
-      //                         );
-      //                       },
-      //                     ));
-      //           });
-      //     },
-      //     future: retrieveData(),
-      //   ),
-      // ),
-
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          setState(() {
-            logOut();
-            Navigator.of(context).pushReplacementNamed('/login');
-          });
-        },
-        label: Text(
-          "Logout",
-          style: TextStyle(
-            fontSize: 30,
-          ),
-        ),
-        backgroundColor: Color(0xff233d4d),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
     );
   }
 
@@ -375,6 +197,7 @@ class _HomeScreenState extends State<HomeScreen> {
     await prefs.remove('PhoneNum');
     await prefs.remove('EmpID');
     await prefs.remove('Role');
+    Navigator.of(context).pushReplacementNamed('/login');
   }
 
   Future refreshData() async {

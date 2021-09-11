@@ -24,37 +24,40 @@ Widget homeTabs() {
 
 Widget homeTab(BuildContext context, double elevation, double radius,
     double height, double width, String image, String label, Function onTap) {
-  return Column(
-    children: [
-      Container(
-        child: GestureDetector(
-          onTap: onTap,
-          child: Card(
-            color: Colors.blue,
-            child: Image(
-              image: AssetImage(
-                image,
+  return Padding(
+    padding: const EdgeInsets.all(20.0),
+    child: Column(
+      children: [
+        Container(
+          child: GestureDetector(
+            onTap: onTap,
+            child: Card(
+              color: Colors.blue,
+              child: Image(
+                image: AssetImage(
+                  image,
+                ),
+              ),
+              elevation: elevation,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(radius),
               ),
             ),
-            elevation: elevation,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(radius),
-            ),
+          ),
+          // height: height,
+          width: width,
+        ),
+        SizedBox(
+          height: 30,
+        ),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: MediaQuery.of(context).size.width / 20,
+            fontWeight: FontWeight.bold,
           ),
         ),
-        // height: height,
-        width: width,
-      ),
-      SizedBox(
-        height: 30,
-      ),
-      Text(
-        label,
-        style: TextStyle(
-          fontSize: MediaQuery.of(context).size.width / 20,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    ],
+      ],
+    ),
   );
 }

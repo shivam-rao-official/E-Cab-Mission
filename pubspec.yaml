@@ -50,8 +50,7 @@ flutter:
     - assets/icons/positive-vote.png
     - assets/icons/help.png
     - assets/icons/confirmation.png
-    - assets/image/Mission pic.jpg
-    - assets/image/missionlogonew.png
+    - assets/icons/exit.png
     - assets/image/missionlogo420.png
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
