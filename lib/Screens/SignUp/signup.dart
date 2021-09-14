@@ -232,7 +232,8 @@ class _SignupScreenState extends State<SignupScreen> {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              Navigator.of(context).pushNamed('/login');
+                              Navigator.of(context)
+                                  .pushReplacementNamed('/login');
                             },
                             child: Text("Login"),
                           ),

@@ -93,7 +93,8 @@ class _ConfirmBookScreensState extends State<ConfirmBookScreens> {
                             child: Text(
                               "Vehicle Number",
                               style: TextStyle(
-                                fontSize: 25,
+                                fontSize:
+                                    MediaQuery.of(context).size.width / 25,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -140,7 +141,8 @@ class _ConfirmBookScreensState extends State<ConfirmBookScreens> {
                             child: Text(
                               "Driver's Number",
                               style: TextStyle(
-                                fontSize: 25,
+                                fontSize:
+                                    MediaQuery.of(context).size.width / 25,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),

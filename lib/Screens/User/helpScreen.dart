@@ -8,31 +8,29 @@ class HelpScreen extends StatelessWidget {
         title: Text("Instruction"),
         centerTitle: true,
       ),
-      body: Container(
-        child: Column(
-          children: [
-            manualText(
-              'assets/icons/sport-car.png',
-              "In the home menu TAP on this icon to book a CAR.",
-            ),
-            manualText(
-              'assets/icons/ambulance.png',
-              "In the home menu TAP on this icon to book an \nAMBULANCE.",
-            ),
-            manualText(
-              'assets/icons/data.png',
-              "In the home menu TAP on this icon to book a CAR.",
-            ),
-            manualText(
-              'assets/icons/help.png',
-              "In the home menu TAP on this icon to book a CAR.",
-            ),
-            manualText(
-              'assets/icons/exit.png',
-              "In the home menu TAP on this icon to book a CAR.",
-            ),
-          ],
-        ),
+      body: Column(
+        children: [
+          manualText(
+            'assets/icons/sport-car.png',
+            "In the home menu TAP on this icon to book a CAR.",
+          ),
+          manualText(
+            'assets/icons/ambulance.png',
+            "In the home menu TAP on this icon to book an AMBULANCE.",
+          ),
+          manualText(
+            'assets/icons/data.png',
+            "In the home menu TAP on this icon to check your trip details.",
+          ),
+          manualText(
+            'assets/icons/help.png',
+            "Tap here for Instruction",
+          ),
+          manualText(
+            'assets/icons/exit.png',
+            "For Ending your session TAP on this icon to logout",
+          ),
+        ],
       ),
     );
   }

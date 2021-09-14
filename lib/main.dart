@@ -53,6 +53,7 @@ class MyApp extends StatelessWidget {
         '/admin': (BuildContext ctxt) => AdminHomeScreen(),
       },
       home: Splash2(),
+      // home: AdminDemo(),
     );
   }
 }

@@ -66,35 +66,40 @@ class _TripSummaryState extends State<TripSummary> {
             )),
         elevation: 0,
       ),
-      body: Column(
-        children: [
-          Align(
-              alignment: Alignment.topLeft,
-              child: tripSummaryText(
-                "Origin",
-                origin,
-                context,
-              )),
-          Align(
-            alignment: Alignment.topLeft,
-            child: tripSummaryText("Destination", dest, context),
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            children: [
+              Align(
+                  alignment: Alignment.topLeft,
+                  child: tripSummaryText(
+                    "Origin",
+                    origin,
+                    context,
+                  )),
+              Align(
+                alignment: Alignment.topLeft,
+                child: tripSummaryText("Destination", dest, context),
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: tripSummaryText("Vehicle Type", vehicleType, context),
+              ),
+              Align(
+                  alignment: Alignment.topLeft,
+                  child:
+                      tripSummaryText("Vehicle Number", vehicleNum, context)),
+              Align(
+                alignment: Alignment.topLeft,
+                child: tripSummaryText("Driver Number", driverNum, context),
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: tripSummaryText("Confirmed By", confirmedBy, context),
+              ),
+            ],
           ),
-          Align(
-            alignment: Alignment.topLeft,
-            child: tripSummaryText("Vehicle Type", vehicleType, context),
-          ),
-          Align(
-              alignment: Alignment.topLeft,
-              child: tripSummaryText("Vehicle Number", vehicleNum, context)),
-          Align(
-            alignment: Alignment.topLeft,
-            child: tripSummaryText("Driver Number", driverNum, context),
-          ),
-          Align(
-            alignment: Alignment.topLeft,
-            child: tripSummaryText("Confirmed By", confirmedBy, context),
-          ),
-        ],
+        ),
       ),
     );
   }

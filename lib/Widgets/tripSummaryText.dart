@@ -12,7 +12,7 @@ Widget tripSummaryText(String label, String value, context) {
             child: Text(
               label,
               style: TextStyle(
-                fontSize: 25,
+                fontSize: MediaQuery.of(context).size.width / 25,
                 fontWeight: FontWeight.bold,
               ),
             ),
